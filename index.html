@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cybersecurity Month — Think Beyond the Control</title>
+
+<style>
+
+:root {
+    --bg: #05090d;
+    --text: #edf5f7;
+    --muted: #8799a3;
+    --muted2: #61737c;
+
+    --cyan: #71d0e2;
+    --gold: #c8aa70;
+
+    --green: #78d0a2;
+    --red: #df7d7d;
+
+    --border: rgba(155,190,201,.14);
+    --border-bright: rgba(113,208,226,.34);
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(57,145,166,.14),
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 90% 50%,
+            rgba(200,170,112,.035),
+            transparent 28%
+        ),
+        var(--bg);
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   BACKGROUND GRID
+========================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(113,208,226,.022) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(113,208,226,.022) 1px,
+            transparent 1px
+        );
+
+    background-size: 48px 48px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 90%
+        );
+
+    z-index: -1;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+    width: min(1000px, calc(100% - 44px));
+
+    margin: 0 auto;
+
+    padding:
+        76px
+        0
+        110px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+
+    color: var(--cyan);
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    letter-spacing: .22em;
+
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: "";
+
+    width: 30px;
+    height: 1px;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 14px rgba(113,208,226,.55);
+}
+
+h1 {
+    margin: 0;
+
+    max-width: 850px;
+
+    font-size:
+        clamp(50px, 7.2vw, 88px);
+
+    line-height: .94;
+
+    letter-spacing: -.06em;
+
+    font-weight: 650;
+}
+
+h1 span {
+    display: block;
+
+    color: transparent;
+
+    background:
+        linear-gradient(
+            100deg,
+            #f4f8f9,
+            #8fd3df 50%,
+            #c8aa70
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+}
+
+.intro {
+    max-width: 680px;
+
+    margin:
+        30px 0 0;
+
+    color: var(--muted);
+
+    font-size: 16px;
+
+    line-height: 1.75;
+}
+
+.header-meta {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 42px;
+
+    padding-bottom: 28px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+}
+
+.week {
+    color: var(--gold);
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+}
+
+.progress {
+    color: var(--muted2);
+
+    font-size: 12px;
+
+    letter-spacing: .14em;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.challenge-intro {
+    display: flex;
+
+    gap: 20px;
+
+    padding:
+        34px 0 30px;
+}
+
+.challenge-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        var(--border-bright);
+
+    color: var(--cyan);
+
+    background:
+        rgba(113,208,226,.04);
+
+    font-size: 17px;
+}
+
+.challenge-intro strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+}
+
+.challenge-intro p {
+    max-width: 700px;
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+#quiz {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+}
+
+
+/* =========================
+   CARD WRAPPER
+========================= */
+
+.card-wrapper {
+    height: 480px;
+
+    width: 100%;
+
+    perspective: 1800px;
+
+    scroll-margin-top: 40px;
+
+    transition:
+        opacity .35s ease,
+        filter .35s ease;
+}
+
+.card-wrapper.locked {
+    opacity: .18;
+
+    filter: grayscale(.5);
+
+    pointer-events: none;
+}
+
+.card-wrapper.current {
+    opacity: 1;
+
+    filter: none;
+
+    pointer-events: auto;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.quiz-card {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform .85s
+        cubic-bezier(.2,.72,.2,1);
+}
+
+.quiz-card.flipped {
+    transform: rotateY(180deg);
+}
+
+
+/* =========================
+   CARD FACE
+========================= */
+
+.card-face {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding:
+        52px 58px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        radial-gradient(
+            circle at 84% 18%,
+            rgba(113,208,226,.075),
+            transparent 29%
+        ),
+        linear-gradient(
+            145deg,
+            #0b171f,
+            #081118
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.42),
+        0 0 80px rgba(40,120,145,.04);
+
+    backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+}
+
+.card-face::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(113,208,226,.024) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(113,208,226,.024) 1px,
+            transparent 1px
+        );
+
+    background-size: 36px 36px;
+
+    mask-image:
+        linear-gradient(
+            135deg,
+            black,
+            transparent 72%
+        );
+}
+
+.card-face::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 190px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            transparent
+        );
+}
+
+.card-front {
+    transform: rotateY(0);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+
+    background:
+        radial-gradient(
+            circle at 15% 18%,
+            rgba(200,170,112,.07),
+            transparent 31%
+        ),
+        linear-gradient(
+            145deg,
+            #0b171f,
+            #071016
+        );
+}
+
+
+/* =========================
+   CARD TOP
+========================= */
+
+.card-top {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.number {
+    color: var(--cyan);
+
+    font-size: 15px;
+
+    font-weight: 750;
+
+    letter-spacing: .16em;
+}
+
+.category {
+    color: var(--muted2);
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    letter-spacing: .2em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+.question-area {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 830px;
+}
+
+.kicker {
+    margin-bottom: 20px;
+
+    color: var(--muted2);
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    letter-spacing: .2em;
+
+    text-transform: uppercase;
+}
+
+.question {
+    margin: 0;
+
+    font-size:
+        clamp(28px, 4vw, 45px);
+
+    line-height: 1.13;
+
+    letter-spacing: -.038em;
+
+    font-weight: 520;
+}
+
+
+/* =========================
+   CHOICES
+========================= */
+
+.decision-area {
+    position: relative;
+
+    z-index: 5;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.instruction {
+    color: var(--muted2);
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    letter-spacing: .15em;
+
+    text-transform: uppercase;
+}
+
+.buttons {
+    display: flex;
+
+    gap: 12px;
+}
+
+.choice {
+    width: 80px;
+
+    height: 60px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(255,255,255,.025);
+
+    color: var(--text);
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    font-size: 24px;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
+}
+
+.choice:hover {
+    transform: translateY(-3px);
+
+    background:
+        rgba(113,208,226,.07);
+
+    border-color:
+        var(--cyan);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.25);
+}
+
+.choice.yes:hover {
+    color: var(--green);
+
+    border-color:
+        rgba(119,208,162,.6);
+}
+
+.choice.no:hover {
+    color: var(--red);
+
+    border-color:
+        rgba(223,125,125,.6);
+}
+
+.choice:disabled {
+    cursor: default;
+
+    opacity: .45;
+
+    transform: none;
+}
+
+.choice-label {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .15em;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    width: fit-content;
+
+    margin-bottom: 28px;
+
+    padding:
+        9px 14px;
+
+    border:
+        1px solid
+        rgba(119,208,162,.3);
+
+    background:
+        rgba(119,208,162,.045);
+
+    color: var(--green);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .17em;
+
+    text-transform: uppercase;
+}
+
+.result.wrong {
+    color: var(--red);
+
+    border-color:
+        rgba(223,125,125,.3);
+
+    background:
+        rgba(223,125,125,.04);
+}
+
+.answer-label {
+    margin-bottom: 15px;
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    letter-spacing: .2em;
+
+    text-transform: uppercase;
+}
+
+.answer {
+    max-width: 800px;
+
+    margin: 0;
+
+    color: #dce7ea;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   NEXT
+========================= */
+
+.next-area {
+    position: relative;
+
+    z-index: 5;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.note {
+    color: var(--muted2);
+
+    font-size: 10px;
+
+    letter-spacing: .08em;
+}
+
+.next-button {
+    padding:
+        14px 20px;
+
+    border:
+        1px solid
+        var(--border-bright);
+
+    background:
+        rgba(113,208,226,.05);
+
+    color: var(--cyan);
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.next-button:hover {
+    transform: translateX(4px);
+
+    background:
+        rgba(113,208,226,.1);
+}
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+#final {
+    display: none;
+
+    min-height: 580px;
+
+    padding:
+        70px 40px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(113,208,226,.09),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #0b171f,
+            #071016
+        );
+}
+
+#final.active {
+    display: flex;
+}
+
+.final-kicker {
+    color: var(--cyan);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .25em;
+
+    text-transform: uppercase;
+}
+
+.final-score {
+    margin-top: 30px;
+
+    font-size:
+        clamp(90px, 15vw, 160px);
+
+    line-height: .85;
+
+    letter-spacing: -.08em;
+
+    font-weight: 600;
+
+    color: transparent;
+
+    background:
+        linear-gradient(
+            120deg,
+            #eef6f8,
+            #71d0e2,
+            #c8aa70
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+}
+
+.final-out {
+    margin-top: 15px;
+
+    color: var(--muted2);
+
+    font-size: 11px;
+
+    letter-spacing: .2em;
+
+    text-transform: uppercase;
+}
+
+.final-title {
+    margin:
+        45px 0 12px;
+
+    font-size:
+        clamp(28px, 5vw, 48px);
+
+    letter-spacing: -.04em;
+}
+
+.final-message {
+    max-width: 610px;
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 15px;
+
+    line-height: 1.75;
+}
+
+.replay {
+    margin-top: 38px;
+
+    padding:
+        14px 24px;
+
+    border:
+        1px solid
+        var(--border-bright);
+
+    background: transparent;
+
+    color: var(--cyan);
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.replay:hover {
+    background:
+        rgba(113,208,226,.08);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 70px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+    color: var(--muted2);
+
+    font-size: 10px;
+
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px) {
+
+    .page {
+        width:
+            calc(100% - 28px);
+
+        padding-top: 45px;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    .header-meta {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .card-wrapper {
+        height: 560px;
+    }
+
+    .card-face {
+        padding:
+            35px 28px;
+    }
+
+    .question {
+        font-size: 29px;
+    }
+
+    .answer {
+        font-size: 16px;
+    }
+
+    .decision-area {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .buttons {
+        width: 100%;
+    }
+
+    .choice {
+        flex: 1;
+    }
+
+    .next-area {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<main class="page">
+
+
+<!-- =========================
+     HEADER
+========================== -->
+
+<header>
+
+    <div class="eyebrow">
+        Cybersecurity Month
+    </div>
+
+
+    <h1>
+        Think Beyond
+        <span>the Control.</span>
+    </h1>
+
+
+    <p class="intro">
+        Security controls are designed to reduce risk.
+        But what happens when the risk isn't inside the control —
+        but between them?
+    </p>
+
+
+    <div class="header-meta">
+
+        <div class="week">
+            Week 01 — The System
+        </div>
+
+        <div
+            class="progress"
+            id="progress"
+        >
+            01 / 10
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     INTRO
+========================== -->
+
+<section class="challenge-intro">
+
+    <div class="challenge-icon">
+        ?
+    </div>
+
+
+    <div>
+
+        <strong>
+            Don't answer too quickly.
+        </strong>
+
+        <p>
+            Ten questions. Two choices.
+            The difficult part isn't knowing the control —
+            it's understanding what happens around it.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     QUIZ
+========================== -->
+
+<section id="quiz"></section>
+
+
+
+<!-- =========================
+     FINAL SCREEN
+========================== -->
+
+<section id="final">
+
+    <div class="final-kicker">
+        Challenge Complete
+    </div>
+
+
+    <div
+        class="final-score"
+        id="finalScore"
+    >
+        0
+    </div>
+
+
+    <div class="final-out">
+        Out of 10
+    </div>
+
+
+    <h2
+        class="final-title"
+        id="finalTitle"
+    >
+        —
+    </h2>
+
+
+    <p
+        class="final-message"
+        id="finalMessage"
+    >
+        —
+    </p>
+
+
+    <button
+        class="replay"
+        id="replayButton"
+    >
+        Replay the challenge
+    </button>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer class="footer">
+
+    <span>
+        Cybersecurity Month
+    </span>
+
+    <span>
+        Think beyond the control
+    </span>
+
+</footer>
+
+
+</main>
+
+
+
+<script>
+
+
+/* =========================================================
+   QUESTION DATA
+========================================================= */
+
+const questions = [
+
+    {
+        category: "Identity · MFA",
+
+        question:
+        "An attacker knows your password but cannot pass MFA. Are you necessarily safe?",
+
+        correct: false,
+
+        answer:
+        "NO — MFA protects an authentication step, not every path into an account. Existing sessions, stolen tokens, trusted devices, recovery mechanisms or API credentials can create other routes."
+    },
+
+
+    {
+        category: "Legitimate Access",
+
+        question:
+        "Can a completely legitimate login from a completely legitimate device still be an attack?",
+
+        correct: true,
+
+        answer:
+        "YES — authentication proves that a valid identity authenticated. It does not automatically prove that the person, session or action is legitimate. A compromised account can produce perfectly valid logins."
+    },
+
+
+    {
+        category: "Read Access",
+
+        question:
+        "Can 'read-only' access become a security problem without ever being changed to 'write'?",
+
+        correct: true,
+
+        answer:
+        "YES — read access can expose sensitive data, configuration, credentials, secrets or information that helps construct the next step of an attack. Low privilege does not automatically mean low impact."
+    },
+
+
+    {
+        category: "Session · Tokens",
+
+        question:
+        "Can stealing a valid session token be more useful to an attacker than stealing the password that created it?",
+
+        correct: true,
+
+        answer:
+        "YES — a valid session token may allow an attacker to inherit an already-authenticated session without repeating the original authentication process or triggering the same controls."
+    },
+
+
+    {
+        category: "Detection",
+
+        question:
+        "If an attack is guaranteed to appear in the logs, can you assume it will be stopped?",
+
+        correct: false,
+
+        answer:
+        "NO — logging is detection and evidence, not prevention. A system can record an attack perfectly while the attacker continues operating successfully."
+    },
+
+
+    {
+        category: "Application Identity",
+
+        question:
+        "Can an application have more authority than the employee who launched it?",
+
+        correct: true,
+
+        answer:
+        "YES — applications can operate using service identities, delegated permissions, API credentials or workload identities that are different from the initiating user's permissions."
+    },
+
+
+    {
+        category: "Device Trust",
+
+        question:
+        "If a device passed every security check at 9:00 AM, does that prove it is trustworthy at 5:00 PM?",
+
+        correct: false,
+
+        answer:
+        "NO — security posture changes. Credentials, processes, configuration, network conditions and device state can change after the original security decision."
+    },
+
+
+    {
+        category: "Attack Paths",
+
+        question:
+        "Can two pieces of information that are harmless individually become dangerous when combined?",
+
+        correct: true,
+
+        answer:
+        "YES — attackers often build attack paths by combining information, permissions and relationships. The risk can emerge from the relationship between otherwise harmless pieces."
+    },
+
+
+    {
+        category: "Indirect Access",
+
+        question:
+        "If an account cannot access production directly, is production automatically outside its attack path?",
+
+        correct: false,
+
+        answer:
+        "NO — indirect routes can exist through applications, delegated access, other identities, credentials, infrastructure or trust relationships."
+    },
+
+
+    {
+        category: "The Blind Spot",
+
+        question:
+        "Can a security control work exactly as designed and still be part of a successful attack?",
+
+        correct: true,
+
+        answer:
+        "YES — a control can function perfectly while the system around it creates an unintended path. The hardest security problems often exist between controls, not inside them."
+    }
+
+];
+
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let current = 0;
+
+let score = 0;
+
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const quiz =
+    document.getElementById("quiz");
+
+const progress =
+    document.getElementById("progress");
+
+const final =
+    document.getElementById("final");
+
+const finalScore =
+    document.getElementById("finalScore");
+
+const finalTitle =
+    document.getElementById("finalTitle");
+
+const finalMessage =
+    document.getElementById("finalMessage");
+
+const replayButton =
+    document.getElementById("replayButton");
+
+
+
+/* =========================================================
+   BUILD QUIZ
+========================================================= */
+
+function buildQuiz() {
+
+    quiz.innerHTML = "";
+
+
+    questions.forEach(
+        (q, index) => {
+
+            const wrapper =
+                document.createElement("div");
+
+
+            wrapper.className =
+                "card-wrapper " +
+                (
+                    index === 0
+                    ? "current"
+                    : "locked"
+                );
+
+
+            wrapper.id =
+                `wrapper-${index}`;
+
+
+            const number =
+                String(index + 1)
+                .padStart(2, "0");
+
+
+            wrapper.innerHTML = `
+
+                <div
+                    class="quiz-card"
+                    id="card-${index}"
+                >
+
+
+                    <!-- FRONT -->
+
+                    <div
+                        class="card-face card-front"
+                    >
+
+
+                        <div class="card-top">
+
+                            <div class="number">
+                                ${number}
+                            </div>
+
+                            <div class="category">
+                                ${q.category}
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="question-area">
+
+                            <div class="kicker">
+                                Challenge ${number}
+                            </div>
+
+
+                            <h2 class="question">
+                                ${q.question}
+                            </h2>
+
+                        </div>
+
+
+
+                        <div class="decision-area">
+
+                            <div class="instruction">
+                                Make your call
+                            </div>
+
+
+                            <div class="buttons">
+
+
+                                <button
+                                    type="button"
+                                    class="choice yes"
+                                    data-index="${index}"
+                                    data-value="true"
+                                >
+
+                                    ✓
+
+                                    <span class="choice-label">
+                                        YES
+                                    </span>
+
+                                </button>
+
+
+
+                                <button
+                                    type="button"
+                                    class="choice no"
+                                    data-index="${index}"
+                                    data-value="false"
+                                >
+
+                                    ✕
+
+                                    <span class="choice-label">
+                                        NO
+                                    </span>
+
+                                </button>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- BACK -->
+
+                    <div
+                        class="card-face card-back"
+                    >
+
+
+                        <div class="card-top">
+
+                            <div class="number">
+                                ${number}
+                            </div>
+
+                            <div class="category">
+                                ${q.category}
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="question-area">
+
+
+                            <div
+                                class="result"
+                                id="result-${index}"
+                            >
+
+                                <span
+                                    id="result-icon-${index}"
+                                >
+                                    ✓
+                                </span>
+
+
+                                <span
+                                    id="result-text-${index}"
+                                >
+                                    Correct
+                                </span>
+
+                            </div>
+
+
+
+                            <div class="answer-label">
+                                The answer
+                            </div>
+
+
+                            <p class="answer">
+                                ${q.answer}
+                            </p>
+
+
+                        </div>
+
+
+
+                        <div class="next-area">
+
+
+                            <div class="note">
+                                Think beyond the control.
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="next-button"
+                                data-next="${index}"
+                            >
+
+                                ${
+                                    index === questions.length - 1
+                                    ? "View your score"
+                                    : "Next challenge →"
+                                }
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+            quiz.appendChild(wrapper);
+
+        }
+    );
+
+
+    attachEvents();
+
+}
+
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+function attachEvents() {
+
+
+    document
+        .querySelectorAll(".choice")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    handleChoice
+                );
+
+            }
+        );
+
+
+
+    document
+        .querySelectorAll(".next-button")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    handleNext
+                );
+
+            }
+        );
+
+}
+
+
+
+/* =========================================================
+   ANSWER
+========================================================= */
+
+function handleChoice(event) {
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+
+    const button =
+        event.currentTarget;
+
+
+    const index =
+        Number(
+            button.dataset.index
+        );
+
+
+    if (index !== current) {
+        return;
+    }
+
+
+    const userAnswer =
+        button.dataset.value === "true";
+
+
+    const question =
+        questions[index];
+
+
+    const isCorrect =
+        userAnswer === question.correct;
+
+
+    const buttons =
+        document.querySelectorAll(
+            `.choice[data-index="${index}"]`
+        );
+
+
+    buttons.forEach(
+        choice => {
+
+            choice.disabled = true;
+
+        }
+    );
+
+
+    if (isCorrect) {
+
+        score++;
+
+    }
+
+
+    const result =
+        document.getElementById(
+            `result-${index}`
+        );
+
+
+    const icon =
+        document.getElementById(
+            `result-icon-${index}`
+        );
+
+
+    const text =
+        document.getElementById(
+            `result-text-${index}`
+        );
+
+
+    if (isCorrect) {
+
+        result.classList.remove(
+            "wrong"
+        );
+
+        icon.textContent = "✓";
+
+        text.textContent =
+            "Correct";
+
+    } else {
+
+        result.classList.add(
+            "wrong"
+        );
+
+        icon.textContent = "✕";
+
+        text.textContent =
+            "Not quite";
+
+    }
+
+
+    const card =
+        document.getElementById(
+            `card-${index}`
+        );
+
+
+    card.classList.add(
+        "flipped"
+    );
+
+
+    progress.textContent =
+        `${String(index + 1).padStart(2, "0")} / 10`;
+
+}
+
+
+
+/* =========================================================
+   NEXT QUESTION
+========================================================= */
+
+function handleNext(event) {
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+
+    const index =
+        Number(
+            event.currentTarget.dataset.next
+        );
+
+
+    if (index !== current) {
+        return;
+    }
+
+
+    if (
+        current ===
+        questions.length - 1
+    ) {
+
+        showFinal();
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            `wrapper-${current}`
+        )
+        .classList.remove(
+            "current"
+        );
+
+
+    current++;
+
+
+    const nextWrapper =
+        document.getElementById(
+            `wrapper-${current}`
+        );
+
+
+    nextWrapper.classList.remove(
+        "locked"
+    );
+
+
+    nextWrapper.classList.add(
+        "current"
+    );
+
+
+    progress.textContent =
+        `${String(current + 1).padStart(2, "0")} / 10`;
+
+
+    setTimeout(
+        () => {
+
+            nextWrapper.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        },
+        120
+    );
+
+}
+
+
+
+/* =========================================================
+   FINAL SCREEN
+========================================================= */
+
+function showFinal() {
+
+    quiz.style.display =
+        "none";
+
+
+    final.classList.add(
+        "active"
+    );
+
+
+    finalScore.textContent =
+        score;
+
+
+    if (score === 10) {
+
+        finalTitle.textContent =
+            "You saw beyond the control.";
+
+        finalMessage.textContent =
+            "Excellent. You weren't just looking at individual controls — you were thinking about identity, trust, sessions, attack paths and the relationships between systems.";
+
+    }
+
+    else if (score >= 8) {
+
+        finalTitle.textContent =
+            "Strong security instincts.";
+
+        finalMessage.textContent =
+            "You recognised that security rarely breaks at a single control. The harder problems usually appear where identities, systems and decisions interact.";
+
+    }
+
+    else if (score >= 6) {
+
+        finalTitle.textContent =
+            "Look closer.";
+
+        finalMessage.textContent =
+            "You understand the controls. The next step is questioning what happens around them — especially when legitimate access, trust and multiple systems intersect.";
+
+    }
+
+    else {
+
+        finalTitle.textContent =
+            "The system has more to tell you.";
+
+        finalMessage.textContent =
+            "Security isn't only about whether a control works. It's about understanding what an attacker can do with everything that works around it.";
+
+    }
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restartQuiz() {
+
+    current = 0;
+
+    score = 0;
+
+
+    final.classList.remove(
+        "active"
+    );
+
+
+    quiz.style.display =
+        "flex";
+
+
+    progress.textContent =
+        "01 / 10";
+
+
+    buildQuiz();
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =========================================================
+   KEYBOARD SUPPORT
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+
+        if (
+            event.key.toLowerCase() === "y"
+        ) {
+
+            const yes =
+                document.querySelector(
+                    `.choice.yes[data-index="${current}"]`
+                );
+
+
+            if (
+                yes &&
+                !yes.disabled
+            ) {
+
+                yes.click();
+
+            }
+
+        }
+
+
+
+        if (
+            event.key.toLowerCase() === "n"
+        ) {
+
+            const no =
+                document.querySelector(
+                    `.choice.no[data-index="${current}"]`
+                );
+
+
+            if (
+                no &&
+                !no.disabled
+            ) {
+
+                no.click();
+
+            }
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   REPLAY
+========================================================= */
+
+replayButton.addEventListener(
+    "click",
+    restartQuiz
+);
+
+
+
+/* =========================================================
+   START
+========================================================= */
+
+buildQuiz();
+
+</script>
+
+</body>
+</html>
